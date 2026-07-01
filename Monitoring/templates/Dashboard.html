@@ -105,31 +105,278 @@
     }
     .data-source-tag.sensor { background: #e3f5ea; color: #0a5535; }
     .data-source-tag.dummy { background: #eef4fa; color: #1b3b57; }
+    .data-source-tag.sensor-offline { background: #fde8e8; color: #a12b2b; }
 
-    /* chart & history */
-    .chart-container { background: #fafcff; border-radius: 28px; padding: 1rem 1rem 0.5rem; border: 1px solid #e9f0f7; }
-    .filter-group .btn-outline-filter {
-      border-radius: 40px; font-size: 0.7rem; font-weight: 600; padding: 0.3rem 1rem;
-      border: 1px solid #d5dfea; color: #2f4a66; background: white;
+    /* CHART - MORE PROFESSIONAL */
+    .chart-container {
+      background: linear-gradient(145deg, #fafcff, #f0f5fd);
+      border-radius: 28px;
+      padding: 1.5rem 1.5rem 0.8rem;
+      border: 1px solid #e2ecf7;
+      box-shadow: inset 0 2px 8px rgba(0,20,40,0.02);
+      transition: all 0.3s ease;
     }
-    .filter-group .btn-outline-filter.active { background: #0d2b4a; color: white; border-color: #0d2b4a; }
-    .filter-group .btn-outline-filter:hover { background: #eef4fa; }
+    .chart-container:hover {
+      border-color: #c8d8e8;
+      box-shadow: 0 8px 24px -8px rgba(0,20,40,0.08);
+    }
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .chart-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .chart-title h6 {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #0a1f34;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+    .chart-title .badge-live {
+      font-size: 0.55rem;
+      font-weight: 600;
+      padding: 0.2rem 0.7rem;
+      border-radius: 40px;
+      background: #e3f5ea;
+      color: #0a5535;
+      border: 1px solid #a8dbbc;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      animation: pulse-badge 2s ease-in-out infinite;
+    }
+    @keyframes pulse-badge {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    .chart-title .badge-live i {
+      font-size: 0.5rem;
+    }
+    .chart-filter-group {
+      display: flex;
+      gap: 4px;
+      background: white;
+      padding: 3px;
+      border-radius: 40px;
+      border: 1px solid #e2ecf7;
+    }
+    .chart-filter-group .btn-filter {
+      border: none;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.3rem 1rem;
+      color: #4a627a;
+      background: transparent;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .chart-filter-group .btn-filter:hover {
+      background: #f0f5fd;
+      color: #0a1f34;
+    }
+    .chart-filter-group .btn-filter.active {
+      background: #0d2b4a;
+      color: white;
+      box-shadow: 0 2px 8px rgba(13,43,74,0.25);
+    }
+    .chart-filter-group .btn-filter.active:hover {
+      background: #1a3d62;
+    }
 
+    /* Chart wrapper */
+    .chart-wrapper {
+      position: relative;
+      height: 185px;
+      width: 100%;
+    }
+    .chart-wrapper canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* Floor filter pills - lebih elegan */
+    .floor-filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid #e8f0f8;
+    }
+    .floor-filter-pills .pill {
+      font-size: 0.6rem;
+      font-weight: 600;
+      padding: 0.25rem 0.9rem;
+      border-radius: 40px;
+      border: 1.5px solid #dce6f0;
+      background: white;
+      color: #4a627a;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .floor-filter-pills .pill:hover {
+      background: #f0f5fd;
+      border-color: #b0c8dd;
+      transform: translateY(-1px);
+    }
+    .floor-filter-pills .pill.active {
+      background: #0d2b4a;
+      border-color: #0d2b4a;
+      color: white;
+      box-shadow: 0 2px 8px rgba(13,43,74,0.2);
+    }
+    .floor-filter-pills .pill.active:hover {
+      background: #1a3d62;
+    }
+    .floor-filter-pills .pill .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 2px;
+    }
+    .floor-filter-pills .pill .dot.d1 { background: #1f6e9e; }
+    .floor-filter-pills .pill .dot.d2 { background: #2b9c5c; }
+    .floor-filter-pills .pill .dot.d3 { background: #b07c3a; }
+    .floor-filter-pills .pill .dot.d4 { background: #e17055; }
+    .floor-filter-pills .pill .badge-sensor {
+      font-size: 0.45rem;
+      background: #e3f5ea;
+      color: #0a5535;
+      padding: 0.05rem 0.4rem;
+      border-radius: 20px;
+      margin-left: 2px;
+    }
+    .floor-filter-pills .pill .badge-sensor.offline {
+      background: #fde8e8;
+      color: #a12b2b;
+    }
+
+    /* History */
+    .history-container {
+      background: linear-gradient(145deg, #fafcff, #f0f5fd);
+      border-radius: 28px;
+      padding: 0.8rem 0.8rem 0.2rem;
+      border: 1px solid #e2ecf7;
+      height: 100%;
+      transition: all 0.3s ease;
+    }
+    .history-container:hover {
+      border-color: #c8d8e8;
+    }
+    .history-container .history-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #0a1f34;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 0.4rem 0.4rem;
+    }
+    .history-container .history-title i {
+      color: #4a627a;
+    }
+    .history-container .history-title .count-badge {
+      font-size: 0.55rem;
+      background: #e8f0f8;
+      color: #4a627a;
+      padding: 0.05rem 0.6rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
     .history-table {
-      font-size: 0.8rem; border-collapse: separate; border-spacing: 0 6px;
+      font-size: 0.78rem;
+      border-collapse: separate;
+      border-spacing: 0 4px;
     }
-    .history-table td, .history-table th { padding: 0.6rem 0.8rem; border: none; background: white; }
-    .history-table thead th { background: #f2f6fc; color: #1a314a; font-weight: 600; border-radius: 16px 16px 0 0; }
-    .history-table tbody tr { border-radius: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
-    .history-table tbody td { background: #fafcff; border-bottom: 1px solid #edf3fa; }
-    .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 12px; margin-right: 6px; }
-    .status-dot.on { background: #1f8b4c; }
-    .status-dot.off { background: #b0bcca; }
-    .status-dot.unknown { background: #dfe6e9; }
+    .history-table thead th {
+      background: transparent;
+      color: #6b7f96;
+      font-weight: 600;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.4rem 0.6rem;
+      border: none;
+      border-bottom: 1px solid #e2ecf7;
+    }
+    .history-table tbody td {
+      background: white;
+      padding: 0.5rem 0.6rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      color: #1a314a;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .history-table tbody tr {
+      transition: all 0.15s;
+    }
+    .history-table tbody tr:hover td {
+      background: #f8faff;
+      box-shadow: 0 2px 8px rgba(0,20,40,0.06);
+    }
+    .history-table .status-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+    .history-table .status-dot.on { background: #1f8b4c; }
+    .history-table .status-dot.off { background: #b0bcca; }
+    .history-table .status-dot.unknown { background: #dfe6e9; }
+    .history-table .floor-name {
+      font-weight: 600;
+    }
+    .history-table .floor-name .sensor-icon {
+      font-size: 0.6rem;
+      color: #e17055;
+    }
+    .history-scroll {
+      max-height: 190px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .history-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .history-scroll::-webkit-scrollbar-track {
+      background: #eef3f9;
+      border-radius: 10px;
+    }
+    .history-scroll::-webkit-scrollbar-thumb {
+      background: #c8d8e8;
+      border-radius: 10px;
+    }
+    .history-scroll::-webkit-scrollbar-thumb:hover {
+      background: #b0c8dd;
+    }
 
     .footer-credit { font-size: 0.7rem; color: #8194ab; border-top: 1px solid #eef3f9; padding-top: 1.2rem; margin-top: 1.8rem; }
 
-    @media (max-width: 576px) { .main-card { padding: 1.2rem; } }
+    @media (max-width: 576px) {
+      .main-card { padding: 1.2rem; }
+      .chart-wrapper { height: 150px; }
+      .chart-filter-group .btn-filter { font-size: 0.6rem; padding: 0.2rem 0.7rem; }
+      .floor-filter-pills .pill { font-size: 0.5rem; padding: 0.15rem 0.6rem; }
+    }
+    @media (max-width: 768px) {
+      .chart-header { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+      .chart-filter-group { align-self: flex-start; }
+    }
   </style>
 </head>
 <body>
@@ -155,34 +402,41 @@
       <!-- each floor card is populated via JS -->
     </div>
 
-    <!-- chart + filter -->
+    <!-- chart + history -->
     <div class="row g-4 mt-2">
       <div class="col-lg-7">
         <div class="chart-container">
-          <div class="d-flex flex-wrap justify-content-between align-items-center mb-2">
-            <span class="fw-semibold" style="color: #0b2035; font-size: 0.9rem;"><i class="bi bi-graph-up-arrow me-1"></i>Intensity (Lux) · last 24h</span>
-            <div class="filter-group d-flex gap-1">
-              <button class="btn btn-outline-filter active" data-range="1h">1h</button>
-              <button class="btn btn-outline-filter" data-range="24h">24h</button>
-              <button class="btn btn-outline-filter" data-range="7d">7d</button>
+          <div class="chart-header">
+            <div class="chart-title">
+              <h6><i class="bi bi-graph-up-arrow" style="color:#1f6e9e;"></i> Intensity (Lux) · last 24h</h6>
+              <span class="badge-live"><i class="bi bi-circle-fill"></i> LIVE</span>
+            </div>
+            <div class="chart-filter-group">
+              <button class="btn-filter active" data-range="1h">1H</button>
+              <button class="btn-filter" data-range="24h">24H</button>
+              <button class="btn-filter" data-range="7d">7D</button>
             </div>
           </div>
-          <canvas id="intensityChart" height="140" style="max-height:170px; width:100%"></canvas>
-          <!-- floor filter pills -->
-          <div class="d-flex flex-wrap gap-2 mt-2" id="chart-floor-filters">
-            <span class="badge bg-dark rounded-pill filter-floor" data-floor="all" style="cursor:pointer; background:#0d2b4a !important;">All</span>
-            <span class="badge bg-secondary rounded-pill filter-floor" data-floor="Lantai 1" style="cursor:pointer;">Lantai 1</span>
-            <span class="badge bg-secondary rounded-pill filter-floor" data-floor="Lantai 2" style="cursor:pointer;">Lantai 2</span>
-            <span class="badge bg-secondary rounded-pill filter-floor" data-floor="Lantai 3" style="cursor:pointer;">Lantai 3</span>
-            <span class="badge bg-warning rounded-pill filter-floor" data-floor="Lantai 4" style="cursor:pointer; color:#000;">Lantai 4 <i class="bi bi-broadcast"></i></span>
+          <div class="chart-wrapper">
+            <canvas id="intensityChart"></canvas>
+          </div>
+          <div class="floor-filter-pills" id="chart-floor-filters">
+            <span class="pill active" data-floor="all">All</span>
+            <span class="pill" data-floor="Lantai 1"><span class="dot d1"></span>Lantai 1</span>
+            <span class="pill" data-floor="Lantai 2"><span class="dot d2"></span>Lantai 2</span>
+            <span class="pill" data-floor="Lantai 3"><span class="dot d3"></span>Lantai 3</span>
+            <span class="pill" data-floor="Lantai 4"><span class="dot d4"></span>Lantai 4 <span class="badge-sensor" id="sensor-status-badge">● Online</span></span>
           </div>
         </div>
       </div>
       <div class="col-lg-5">
-        <div style="background:#fafcff; border-radius:28px; padding:0.8rem 0.8rem 0.2rem; border:1px solid #e9f0f7; height:100%;">
-          <span class="fw-semibold" style="color:#0b2035; font-size:0.9rem;"><i class="bi bi-clock-history me-1"></i>History</span>
-          <div style="max-height:200px; overflow-y:auto; margin-top:6px;">
-            <table class="table history-table" id="history-table">
+        <div class="history-container">
+          <div class="history-title">
+            <i class="bi bi-clock-history"></i> History
+            <span class="count-badge" id="history-count">6 events</span>
+          </div>
+          <div class="history-scroll">
+            <table class="table history-table">
               <thead><tr><th>Time</th><th>Floor</th><th>Status</th><th>Lux</th><th>ADC</th></tr></thead>
               <tbody id="history-body"></tbody>
             </table>
@@ -204,11 +458,10 @@
   // ================================================================
   // KONFIGURASI
   // ================================================================
-  // 🔧 GANTI URL INI DENGAN ENDPOINT SENSOR ANDA
   const SENSOR_API_URL = '/api/sensor/lantai4/';
 
   // ================================================================
-  // DATA DUMMY UNTUK LANTAI 1-3
+  // DATA
   // ================================================================
   let floorData = [
     { id: 1, name: 'Lantai 1', status: 'on', lux: 720, adc: 450, esp: 'online', lastUpdated: new Date().toLocaleString('en-US', {hour12:false}), source: 'dummy' },
@@ -217,7 +470,10 @@
     { id: 4, name: 'Lantai 4', status: 'unknown', lux: 0, adc: 0, esp: 'offline', lastUpdated: '-', source: 'real' }
   ];
 
-  // History entries
+  let luxZeroCounter = 0;
+  const OFFLINE_THRESHOLD = 2;
+  let isSensorOnline = true;
+
   let historyEntries = [
     { time: '10:30', floor: 'Lantai 1', status: 'ON', lux: 850, adc: 500 },
     { time: '10:25', floor: 'Lantai 3', status: 'OFF', lux: 20, adc: 10 },
@@ -227,30 +483,21 @@
     { time: '09:30', floor: 'Lantai 3', status: 'OFF', lux: 18, adc: 8 }
   ];
 
-  // Chart history
-  let chartHistory = [];
-
   // ================================================================
-  // FUNGSI MEMBACA SENSOR REAL - LANTAI 4
+  // FUNGSI SENSOR
   // ================================================================
   async function fetchRealSensorData() {
     try {
       console.log('📡 Membaca data sensor real Lantai 4...');
-      
       const response = await fetch(SENSOR_API_URL, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         signal: AbortSignal.timeout(3000)
       });
-      
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-      
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
-      console.log('✅ Data sensor Lantai 4 diterima:', data);
+      console.log('✅ Data sensor Lantai 4:', data);
       
-      // Format payload: { lux, adc, lamp_status }
       const validLux = typeof data.lux === 'number' && data.lux >= 0 ? data.lux : 0;
       const validAdc = typeof data.adc === 'number' && data.adc >= 0 ? data.adc : 0;
       const validLampStatus = data.lamp_status === 1 ? 1 : 0;
@@ -265,52 +512,58 @@
         lastUpdated: new Date().toLocaleString('en-US', {hour12:false}),
         source: 'real'
       };
-      
     } catch (error) {
-      console.warn('⚠️ Gagal membaca sensor Lantai 4:', error.message);
-      
-      // Sensor offline → semua nilai 0
+      console.warn('⚠️ Gagal membaca sensor:', error.message);
       return {
-        lux: 0,
-        adc: 0,
-        lamp_status: 0,
-        status: 'unknown',
+        lux: 0, adc: 0, lamp_status: 0, status: 'unknown',
         esp: 'offline',
-        lastUpdated: new Date().toLocaleString('en-US', {hour12:false}) + ' (sensor offline)',
+        lastUpdated: new Date().toLocaleString('en-US', {hour12:false}) + ' (offline)',
         source: 'offline'
       };
     }
   }
 
-  // ================================================================
-  // UPDATE LANTAI 4 DARI SENSOR
-  // ================================================================
   async function updateLantai4FromSensor() {
     const sensorData = await fetchRealSensorData();
     const floor4 = floorData.find(f => f.id === 4);
-    
     if (!floor4) return;
     
     const oldStatus = floor4.status;
     const oldLux = floor4.lux;
     
-    // Update data Lantai 4 dengan data sensor
+    if (sensorData.lux === 0) {
+      luxZeroCounter++;
+      if (luxZeroCounter >= OFFLINE_THRESHOLD) {
+        isSensorOnline = false;
+        sensorData.esp = 'offline';
+        sensorData.status = 'unknown';
+        sensorData.source = 'offline';
+        sensorData.lastUpdated = new Date().toLocaleString('en-US', {hour12:false}) + ' (offline)';
+      }
+    } else {
+      luxZeroCounter = 0;
+      isSensorOnline = true;
+    }
+    
     floor4.status = sensorData.status;
     floor4.lux = sensorData.lux;
     floor4.adc = sensorData.adc;
     floor4.esp = sensorData.esp;
     floor4.lastUpdated = sensorData.lastUpdated;
-    floor4.source = sensorData.source;
+    floor4.source = 'real';
     
-    // Update status sensor di header
     updateSensorStatus(sensorData);
     
-    // Tambahkan ke history jika ada perubahan
-    if (oldStatus !== sensorData.status || Math.abs(oldLux - sensorData.lux) > 10) {
+    const shouldAddHistory = (oldStatus !== sensorData.status || 
+                             Math.abs(oldLux - sensorData.lux) > 10 ||
+                             (sensorData.lux === 0 && !isSensorOnline) ||
+                             (isSensorOnline && sensorData.lux > 0 && oldLux === 0));
+    
+    if (shouldAddHistory) {
       historyEntries.unshift({
         time: new Date().toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', hour12:false}),
         floor: floor4.name,
-        status: sensorData.status === 'unknown' ? 'OFFLINE' : sensorData.status.toUpperCase(),
+        status: isSensorOnline ? (sensorData.status === 'on' ? 'ON' : 'OFF') : 'OFFLINE',
         lux: sensorData.lux,
         adc: sensorData.adc
       });
@@ -321,21 +574,30 @@
     renderHistory();
     updateChartData();
     updateSummary();
+    updateSensorBadge();
   }
 
-  // ================================================================
-  // UPDATE STATUS SENSOR DI HEADER
-  // ================================================================
   function updateSensorStatus(data) {
     const statusText = document.getElementById('sensor-status-text');
     const statusPill = document.getElementById('sensor-status-pill');
-    
-    if (data.status === 'unknown' || data.lux === 0 && data.esp === 'offline') {
+    if (!isSensorOnline || data.lux === 0 || data.esp === 'offline') {
       statusText.textContent = '⚠️ Offline';
       statusPill.className = 'stat-pill sensor-offline';
     } else {
       statusText.textContent = '✅ Online';
       statusPill.className = 'stat-pill sensor';
+    }
+  }
+
+  function updateSensorBadge() {
+    const badge = document.getElementById('sensor-status-badge');
+    if (!badge) return;
+    if (isSensorOnline && floorData.find(f => f.id === 4)?.lux > 0) {
+      badge.textContent = '● Online';
+      badge.className = 'badge-sensor';
+    } else {
+      badge.textContent = '● Offline';
+      badge.className = 'badge-sensor offline';
     }
   }
 
@@ -350,9 +612,9 @@
       col.className = 'col-12 col-sm-6 col-xl-3';
       
       const isReal = f.source === 'real';
-      const isSensorOnline = isReal && f.status !== 'unknown' && f.lux > 0;
+      const isSensorOnlineStatus = isReal && isSensorOnline && f.lux > 0;
       const cardClass = isReal 
-        ? (isSensorOnline ? 'card floor-card sensor-active' : 'card floor-card sensor-offline')
+        ? (isSensorOnlineStatus ? 'card floor-card sensor-active' : 'card floor-card sensor-offline')
         : 'card floor-card';
       
       const statusClass = f.status === 'on' ? 'on' : (f.status === 'off' ? 'off' : 'unknown');
@@ -360,17 +622,28 @@
       const luxVal = f.lux;
       const isZero = luxVal === 0;
       
-      // Sensor badge
       let sensorBadgeHtml = '';
       if (isReal) {
-        sensorBadgeHtml = `<span class="sensor-badge ${isSensorOnline ? 'online' : 'offline'} ms-1">
-          <i class="bi bi-${isSensorOnline ? 'wifi' : 'wifi-off'}"></i> 
-          ${isSensorOnline ? 'REAL' : 'OFFLINE'}
-        </span>`;
+        sensorBadgeHtml = isSensorOnline && f.lux > 0
+          ? `<span class="sensor-badge online ms-1"><i class="bi bi-wifi"></i> ONLINE</span>`
+          : `<span class="sensor-badge offline ms-1"><i class="bi bi-wifi-off"></i> OFFLINE</span>`;
       } else {
-        sensorBadgeHtml = `<span class="sensor-badge dummy ms-1">
-          <i class="bi bi-database"></i> DUMMY
-        </span>`;
+        sensorBadgeHtml = `<span class="sensor-badge dummy ms-1"><i class="bi bi-database"></i> DUMMY</span>`;
+      }
+      
+      let dataSourceClass = 'data-source-tag';
+      let dataSourceIcon = 'database';
+      let dataSourceText = 'Dummy data';
+      if (isReal) {
+        if (isSensorOnline && f.lux > 0) {
+          dataSourceClass += ' sensor';
+          dataSourceIcon = 'broadcast';
+          dataSourceText = 'Real sensor';
+        } else {
+          dataSourceClass += ' sensor-offline';
+          dataSourceIcon = 'wifi-off';
+          dataSourceText = 'Sensor offline';
+        }
       }
       
       col.innerHTML = `
@@ -420,9 +693,9 @@
               </button>
             </div>
             <div class="mt-1">
-              <span class="data-source-tag ${isReal ? 'sensor' : 'dummy'}">
-                <i class="bi bi-${isReal ? 'broadcast' : 'database'}"></i> 
-                ${isReal ? (isSensorOnline ? 'Real sensor' : 'Sensor offline') : 'Dummy data'}
+              <span class="${dataSourceClass}">
+                <i class="bi bi-${dataSourceIcon}"></i> 
+                ${dataSourceText}
               </span>
             </div>
           </div>
@@ -443,22 +716,20 @@
     const online = floorData.filter(f => f.esp === 'online').length;
     document.getElementById('esp-online-count').textContent = online;
     document.getElementById('esp-total-count').textContent = floorData.length;
+    document.getElementById('history-count').textContent = historyEntries.length + ' events';
   }
 
   function attachFloorEvents() {
-    // Toggle hanya untuk dummy data (Lantai 1-3)
     document.querySelectorAll('.btn-toggle-floor:not([disabled])').forEach((btn) => {
       btn.addEventListener('click', function(e) {
         const card = this.closest('.floor-card');
         const id = parseInt(card.dataset.floorId);
         const floor = floorData.find(f => f.id === id);
         if (!floor || floor.source === 'real') return;
-        
         floor.status = floor.status === 'on' ? 'off' : 'on';
         floor.lux = floor.status === 'on' ? Math.floor(600 + Math.random()*300) : Math.floor(10 + Math.random()*30);
         floor.adc = floor.status === 'on' ? Math.floor(300 + Math.random()*500) : Math.floor(10 + Math.random()*30);
         floor.lastUpdated = new Date().toLocaleString('en-US', {hour12:false});
-        
         historyEntries.unshift({
           time: new Date().toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', hour12:false}),
           floor: floor.name,
@@ -467,7 +738,6 @@
           adc: floor.adc
         });
         if (historyEntries.length > 20) historyEntries.pop();
-        
         renderFloorCards();
         renderHistory();
         updateChartData();
@@ -475,19 +745,15 @@
       });
     });
 
-    // Refresh untuk semua floor
     document.querySelectorAll('.btn-refresh-floor').forEach((btn) => {
       btn.addEventListener('click', function(e) {
         const card = this.closest('.floor-card');
         const id = parseInt(card.dataset.floorId);
         const floor = floorData.find(f => f.id === id);
         if (!floor) return;
-        
         if (floor.source === 'real') {
-          // Refresh sensor real
           updateLantai4FromSensor();
         } else {
-          // Refresh dummy
           floor.esp = Math.random() > 0.2 ? 'online' : 'offline';
           floor.lux = floor.status === 'on' ? Math.floor(500 + Math.random()*400) : Math.floor(10 + Math.random()*30);
           floor.adc = floor.status === 'on' ? Math.floor(300 + Math.random()*500) : Math.floor(10 + Math.random()*30);
@@ -501,105 +767,243 @@
   }
 
   // ================================================================
-  // CHART
+  // CHART - PROFESSIONAL
   // ================================================================
   let intensityChart = null;
+  const chartColors = ['#1f6e9e', '#2b9c5c', '#b07c3a', '#e17055'];
+  const chartLabels = ['00:00','02:00','04:00','06:00','08:00','10:00','12:00','14:00','16:00','18:00','20:00','22:00'];
 
   function initChart() {
     const ctx = document.getElementById('intensityChart').getContext('2d');
+    
+    const gradient1 = ctx.createLinearGradient(0, 0, 0, 180);
+    gradient1.addColorStop(0, 'rgba(31, 110, 158, 0.12)');
+    gradient1.addColorStop(1, 'rgba(31, 110, 158, 0.01)');
+    
+    const gradient2 = ctx.createLinearGradient(0, 0, 0, 180);
+    gradient2.addColorStop(0, 'rgba(43, 156, 92, 0.12)');
+    gradient2.addColorStop(1, 'rgba(43, 156, 92, 0.01)');
+    
+    const gradient3 = ctx.createLinearGradient(0, 0, 0, 180);
+    gradient3.addColorStop(0, 'rgba(176, 124, 58, 0.12)');
+    gradient3.addColorStop(1, 'rgba(176, 124, 58, 0.01)');
+    
+    const gradient4 = ctx.createLinearGradient(0, 0, 0, 180);
+    gradient4.addColorStop(0, 'rgba(225, 112, 85, 0.15)');
+    gradient4.addColorStop(1, 'rgba(225, 112, 85, 0.02)');
+
     intensityChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['00:00','02:00','04:00','06:00','08:00','10:00','12:00','14:00','16:00','18:00','20:00','22:00'],
+        labels: chartLabels,
         datasets: [
-          { label: 'Lantai 1 (Dummy)', data: [120,110,100,150,700,750,780,800,720,650,400,200], borderColor: '#1f6e9e', backgroundColor: 'transparent', tension:0.3, borderWidth:2, pointRadius:1 },
-          { label: 'Lantai 2 (Dummy)', data: [80,70,60,90,650,720,740,760,680,600,350,150], borderColor: '#2b9c5c', backgroundColor: 'transparent', tension:0.3, borderWidth:2, pointRadius:1 },
-          { label: 'Lantai 3 (Dummy)', data: [40,30,20,50,600,690,710,730,660,580,300,100], borderColor: '#b07c3a', backgroundColor: 'transparent', tension:0.3, borderWidth:2, pointRadius:1 },
-          { label: 'Lantai 4 (Real Sensor)', data: [0,0,0,0,0,0,0,0,0,0,0,0], borderColor: '#e17055', backgroundColor: 'transparent', tension:0.3, borderWidth:3, pointRadius:2, borderDash: [5, 3] }
+          { 
+            label: 'Lantai 1', 
+            data: [120,110,100,150,700,750,780,800,720,650,400,200],
+            borderColor: '#1f6e9e',
+            backgroundColor: gradient1,
+            borderWidth: 2.5,
+            pointRadius: 3,
+            pointBackgroundColor: '#1f6e9e',
+            pointBorderColor: 'white',
+            pointBorderWidth: 1.5,
+            pointHoverRadius: 6,
+            tension: 0.4,
+            fill: true,
+          },
+          { 
+            label: 'Lantai 2', 
+            data: [80,70,60,90,650,720,740,760,680,600,350,150],
+            borderColor: '#2b9c5c',
+            backgroundColor: gradient2,
+            borderWidth: 2.5,
+            pointRadius: 3,
+            pointBackgroundColor: '#2b9c5c',
+            pointBorderColor: 'white',
+            pointBorderWidth: 1.5,
+            pointHoverRadius: 6,
+            tension: 0.4,
+            fill: true,
+          },
+          { 
+            label: 'Lantai 3', 
+            data: [40,30,20,50,600,690,710,730,660,580,300,100],
+            borderColor: '#b07c3a',
+            backgroundColor: gradient3,
+            borderWidth: 2.5,
+            pointRadius: 3,
+            pointBackgroundColor: '#b07c3a',
+            pointBorderColor: 'white',
+            pointBorderWidth: 1.5,
+            pointHoverRadius: 6,
+            tension: 0.4,
+            fill: true,
+          },
+          { 
+            label: 'Lantai 4', 
+            data: [0,0,0,0,0,0,0,0,0,0,0,0],
+            borderColor: '#e17055',
+            backgroundColor: gradient4,
+            borderWidth: 3,
+            pointRadius: 4,
+            pointBackgroundColor: '#e17055',
+            pointBorderColor: 'white',
+            pointBorderWidth: 2,
+            pointHoverRadius: 7,
+            tension: 0.4,
+            fill: true,
+            borderDash: [],
+          }
         ]
       },
       options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { 
-          legend: { 
-            display: true, 
-            position: 'top',
-            labels: { font: { size: 9 }, boxWidth: 12, padding: 8 }
-          } 
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false,
         },
-        scales: { y: { beginAtZero: true, grid: { color: '#eef2f7' } }, x: { grid: { display: false } } }
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              font: { size: 10, weight: '600' },
+              padding: 16,
+              usePointStyle: true,
+              pointStyle: 'circle',
+              boxWidth: 8,
+              color: '#4a627a',
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(255,255,255,0.95)',
+            titleColor: '#0a1f34',
+            bodyColor: '#4a627a',
+            borderColor: '#e2ecf7',
+            borderWidth: 1,
+            cornerRadius: 12,
+            padding: 12,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
+            callbacks: {
+              label: function(context) {
+                return context.dataset.label + ': ' + context.parsed.y + ' Lux';
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 1000,
+            grid: {
+              color: 'rgba(0,20,40,0.06)',
+              drawBorder: false,
+              lineWidth: 1,
+            },
+            ticks: {
+              font: { size: 9, weight: '500' },
+              color: '#8194ab',
+              stepSize: 200,
+              padding: 8,
+            },
+            title: {
+              display: true,
+              text: 'Lux',
+              font: { size: 9, weight: '600' },
+              color: '#8194ab',
+            }
+          },
+          x: {
+            grid: {
+              display: false,
+            },
+            ticks: {
+              font: { size: 9, weight: '500' },
+              color: '#8194ab',
+              maxRotation: 0,
+              autoSkip: true,
+              maxTicksLimit: 12,
+            }
+          }
+        }
       }
     });
   }
 
   function updateChartData() {
-    if (intensityChart) {
-      const datasets = intensityChart.data.datasets;
-      const dummyBases = [120, 80, 40];
-      
-      datasets.forEach((ds, idx) => {
-        if (idx < 3) {
-          const base = dummyBases[idx];
+    if (!intensityChart) return;
+    const datasets = intensityChart.data.datasets;
+    
+    // Dummy data untuk Lantai 1-3
+    const dummyBases = [120, 80, 40];
+    datasets.forEach((ds, idx) => {
+      if (idx < 3) {
+        const base = dummyBases[idx];
+        const newData = ds.data.map((v, i) => {
+          const hour = i;
+          let val = base + Math.sin(hour/2) * 50 + Math.random() * 40;
+          if (hour > 5 && hour < 20) val += 500 + Math.random() * 200;
+          return Math.max(10, Math.min(900, Math.floor(val)));
+        });
+        ds.data = newData;
+      } else {
+        // Lantai 4
+        const floor4 = floorData.find(f => f.id === 4);
+        if (floor4) {
+          const currentLux = floor4.lux || 0;
+          const isOnline = isSensorOnline && currentLux > 0;
           const newData = ds.data.map((v, i) => {
-            const hour = i;
-            let val = base + Math.sin(hour/2) * 50 + Math.random() * 40;
-            if (hour > 5 && hour < 20) val += 500 + Math.random() * 200;
-            return Math.max(10, Math.min(900, Math.floor(val)));
+            if (!isOnline) return 0;
+            let val = currentLux + Math.random() * 40 - 20;
+            return Math.max(0, Math.floor(val));
           });
           ds.data = newData;
-        } else {
-          // Lantai 4 - ambil dari sensor
-          const floor4 = floorData.find(f => f.id === 4);
-          if (floor4) {
-            const currentLux = floor4.lux || 0;
-            const newData = ds.data.map((v, i) => {
-              if (currentLux === 0) return 0;
-              const hour = i;
-              let val = currentLux + Math.random() * 60 - 30;
-              return Math.max(0, Math.floor(val));
-            });
-            ds.data = newData;
-            ds.borderColor = currentLux > 0 ? '#e17055' : '#dfe6e9';
-          }
+          ds.borderColor = isOnline ? '#e17055' : '#b0bcca';
+          ds.backgroundColor = isOnline ? 'rgba(225, 112, 85, 0.15)' : 'rgba(176, 188, 202, 0.08)';
+          ds.borderDash = isOnline ? [] : [6, 4];
+          ds.pointBackgroundColor = isOnline ? '#e17055' : '#b0bcca';
+          ds.pointRadius = isOnline ? 4 : 2;
         }
-      });
-      intensityChart.update();
-    }
+      }
+    });
+    intensityChart.update('none');
   }
 
   // ================================================================
-  // HISTORY TABLE
+  // HISTORY
   // ================================================================
   function renderHistory() {
     const tbody = document.getElementById('history-body');
     tbody.innerHTML = '';
     historyEntries.slice(0, 15).forEach(h => {
       const tr = document.createElement('tr');
-      const statusDot = h.status === 'ON' ? 'on' : (h.status === 'OFF' ? 'off' : 'unknown');
+      const isOffline = h.status === 'OFFLINE';
+      const statusDot = isOffline ? 'unknown' : (h.status === 'ON' ? 'on' : 'off');
       const isReal = h.floor === 'Lantai 4';
       tr.innerHTML = `
-        <td>${h.time}</td>
-        <td>${h.floor} ${isReal ? '📡' : ''}</td>
+        <td style="color:#6b7f96; font-weight:400;">${h.time}</td>
+        <td class="floor-name">${h.floor} ${isReal ? '<span class="sensor-icon">📡</span>' : ''}</td>
         <td><span class="status-dot ${statusDot}"></span>${h.status}</td>
-        <td>${h.lux}</td>
-        <td>${h.adc || 0}</td>
+        <td style="font-weight:600; color:#0a1f34;">${h.lux}</td>
+        <td style="color:#6b7f96;">${h.adc || 0}</td>
       `;
       tbody.appendChild(tr);
     });
+    document.getElementById('history-count').textContent = historyEntries.length + ' events';
   }
 
   // ================================================================
   // FILTERS
   // ================================================================
-  document.querySelectorAll('.filter-group .btn-outline-filter').forEach(btn => {
+  document.querySelectorAll('.chart-filter-group .btn-filter').forEach(btn => {
     btn.addEventListener('click', function() {
-      document.querySelectorAll('.filter-group .btn-outline-filter').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.chart-filter-group .btn-filter').forEach(b => b.classList.remove('active'));
       this.classList.add('active');
-      
       const range = this.dataset.range;
       let labels;
       if (range === '1h') labels = Array.from({length:12}, (_,i) => `${i*5}min`);
-      else if (range === '24h') labels = ['00:00','02:00','04:00','06:00','08:00','10:00','12:00','14:00','16:00','18:00','20:00','22:00'];
+      else if (range === '24h') labels = chartLabels;
       else labels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
       if (intensityChart) {
         intensityChart.data.labels = labels;
@@ -608,13 +1012,14 @@
     });
   });
 
-  document.querySelectorAll('.filter-floor').forEach(el => {
+  document.querySelectorAll('.floor-filter-pills .pill').forEach(el => {
     el.addEventListener('click', function() {
       const floor = this.dataset.floor;
-      document.querySelectorAll('.filter-floor').forEach(b => b.classList.remove('bg-dark'));
-      this.classList.add('bg-dark');
+      document.querySelectorAll('.floor-filter-pills .pill').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
       if (intensityChart) {
-        intensityChart.data.datasets.forEach(ds => {
+        intensityChart.data.datasets.forEach((ds, idx) => {
+          const labels = ['Lantai 1', 'Lantai 2', 'Lantai 3', 'Lantai 4'];
           if (floor === 'all') {
             ds.hidden = false;
           } else {
@@ -642,14 +1047,9 @@
     renderHistory();
     initChart();
     
-    console.log('🚀 Dashboard - Lantai 1-3 (Dummy), Lantai 4 (Real Sensor)');
-    console.log(`📡 Endpoint Lantai 4: ${SENSOR_API_URL}`);
-    
-    // Update sensor real setiap 3 detik
     updateLantai4FromSensor();
-    setInterval(updateLantai4FromSensor, 3000);
+    setInterval(updateLantai4FromSensor, 5000);
     
-    // Update dummy data setiap 8 detik (Lantai 1-3)
     setInterval(() => {
       floorData.forEach(f => {
         if (f.source === 'dummy') {
@@ -663,7 +1063,6 @@
       updateChartData();
       updateSummary();
       
-      // Tambahkan history random untuk dummy
       const dummyFloors = floorData.filter(f => f.source === 'dummy');
       const randomFloor = dummyFloors[Math.floor(Math.random() * dummyFloors.length)];
       if (randomFloor && Math.random() > 0.7) {
